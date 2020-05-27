@@ -17,6 +17,7 @@ export interface PeriodicElement {
 const ELEMENT_DATA: PeriodicElement[] = [
   {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
   {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
+  {taskDescription: 'swarnesh', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
   {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
   {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
   {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
@@ -25,8 +26,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
   {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
   {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
+  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'}
 ];
 
 @Component({
@@ -36,7 +36,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class TasklistComponent implements OnInit {
   displayedColumns: string[] = ['taskDescription', 'taskType', 'createdDate','dueDate', 'status','actions'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource(ELEMENT_DATA);
   /*tasks: tassks[];*/
   errorMessage: string;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -48,6 +48,11 @@ export class TasklistComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
     this.dialog.open(AddtaskComponent,dialogConfig);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   /*getTask() {
