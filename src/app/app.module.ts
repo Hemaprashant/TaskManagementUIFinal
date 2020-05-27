@@ -27,7 +27,7 @@ import { TaskService } from './shared/task.service';
     FormsModule
   ],
   providers: [HeroService,TaskService],
-  bootstrap: [TasklistComponent],
+  bootstrap: [SearchComponent,TasklistComponent],
   entryComponents:[AddtaskComponent]
 })
 export class AppModule { }

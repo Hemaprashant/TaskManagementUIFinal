@@ -16,17 +16,17 @@ export interface PeriodicElement {
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
+  {taskDescription: 'swathi', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
   {taskDescription: 'swarnesh', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
   {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
+  {taskDescription: 'Rohith', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
+  {taskDescription: 'Vamsi', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
+  {taskDescription: 'varun', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
+  {taskDescription: 'vijay', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
+  {taskDescription: 'swarnesh', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
+  {taskDescription: 'Rohith', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
   {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'}
+  {taskDescription: 'swathi', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'}
 ];
 
 @Component({
