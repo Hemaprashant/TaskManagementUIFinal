@@ -1,0 +1,52 @@
+.upper{
+  width:100%;
+  height:11%;
+}
+.middle{
+  width:100%;
+  height:20%;
+}
+.lower{
+  width:100%;
+  height:75%;
+}
+p {
+    text-align:center;
+}
+.title-center {
+    flex: 1 1 auto;
+    text-align: center;
+}
+.transbox {
+  margin: 30px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.6;
+  position : absolute;
+  left : 0%;
+  top : 10%;
+  width : 94%;
+  height : 8%;
+  padding : 10px;
+}
+
+.transbox p {
+  margin: 5%;
+  font-weight: bold;
+  color: #000000;
+}
+.inl{
+  display:inline-block;
+  width : 30%;
+  height : 0%;
+  display: flex; 
+  flex-direction: row;
+} 
+mat-form-field {
+  margin-right:  50px;
+  left:30%;
+}
+.button1{
+  margin-left: 50%;
+  padding : 10px;
+}
