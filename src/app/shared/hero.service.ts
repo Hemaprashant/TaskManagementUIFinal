@@ -1,37 +1,41 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import {Tasks} from '../search/tasks';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeroService {
-
-  constructor() { }
-
+  constructor(private http: HttpClient) { }
+  
   form: FormGroup = new FormGroup({
-    $key: new FormControl(null),
+    
     taskDescription: new FormControl('', Validators.required),
     taskType: new FormControl(''),
-    CreatedDate: new FormControl(''),
-    duedate: new FormControl(''),
-    Status: new FormControl(''),
-    isPermanent: new FormControl(false)
+    createdDate: new FormControl(''),
+    dueDate: new FormControl(''),
+    status: new FormControl('')
+    
   });
 
   initializeFormGroup() {
     this.form.setValue({
-      $key: null,
+     
       taskDescription: '',
       taskType: '',
-      CreatedDate: '',
-      duedate: '',
-      Status: '',
-      isPermanent: false
+      dueDate: '',
+      createdDate:'',
+      status: ''
+      
     });
   }
 
-  populateForm(Addtask) {
-    this.form.setValue((Addtask));
+  populateForm(task:Tasks) {
+    this.form.setValue(task);
   }
 }
