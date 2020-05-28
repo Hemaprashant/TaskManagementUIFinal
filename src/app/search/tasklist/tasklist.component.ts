@@ -1,32 +1,33 @@
 import { Component, OnInit ,ViewChild} from '@angular/core';
 import { HeroService } from '../../shared/hero.service';
 import {MatPaginator} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
+/*import {MatSort} from '@angular/material/sort';*/
 import {MatDialog,MatDialogConfig} from '@angular/material/dialog';
 import {AddtaskComponent} from './../addtask/addtask.component';
 import {MatTableDataSource} from '@angular/material/table';
 
+
 export interface PeriodicElement {
   taskDescription: string;
   taskType: string;
-  createdDate: number;
-  dueDate: number;
+  createdDate: Date;
+  dueDate: Date;
   status: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'swathi', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'swarnesh', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'Rohith', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'Vamsi', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'varun', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'vijay', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'swarnesh', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'Rohith', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'},
-  {taskDescription: 'swathi', taskType: 'Personal', createdDate:5/5/2020,dueDate: 10/5/2020 ,status: 'New'}
+  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:new Date('5/4/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
+  {taskDescription: 'swathi', taskType: 'Shopping', createdDate:new Date('5/4/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
+  {taskDescription: 'swarnesh', taskType: 'Work', createdDate:new Date('12/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
+  {taskDescription: 'Prashant', taskType: 'shopping', createdDate:new Date('5/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
+  {taskDescription: 'Rohith', taskType: 'Personal', createdDate:new Date('1/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
+  {taskDescription: 'Vamsi', taskType: 'Personal', createdDate:new Date('5/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
+  {taskDescription: 'varun', taskType: 'Others', createdDate:new Date('6/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
+  {taskDescription: 'vijay', taskType: 'Personal', createdDate:new Date('10/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
+  {taskDescription: 'swarnesh', taskType: 'Others', createdDate:new Date('4/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
+  {taskDescription: 'Rohith', taskType: 'Personal', createdDate:new Date('25/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
+  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:new Date('25/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
+  {taskDescription: 'swathi', taskType: 'Personal', createdDate:new Date('5/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'}
 ];
 
 @Component({
@@ -39,6 +40,7 @@ export class TasklistComponent implements OnInit {
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   /*tasks: tassks[];*/
   errorMessage: string;
+  /*@ViewChild(MatSort) sort: MatSort;*/
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(private heroService: HeroService,private dialog: MatDialog) { }
   openCreate() {
