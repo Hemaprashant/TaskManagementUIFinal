@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HeroService } from '../../shared/hero.service';
 
 @Component({
   selector: 'app-addtask',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddtaskComponent implements OnInit {
 
-  constructor() { }
+  constructor(public service:HeroService) { }
 
   ngOnInit(): void {
   }

@@ -7,11 +7,11 @@
 </div>
 <mat-card style="padding-left:10%;padding-right:10%;top; justify-content: space-around;">
 <div class="inl">
-  <div class="button1">
-    <button mat-raised-button color="primary">
+ <div class="button1" > 
+    <button mat-raised-button color="primary" (click)="onCreate()">
       <mat-icon>add</mat-icon>Create Task
     </button>
-  </div> 
+  </div>
       <mat-form-field>
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
@@ -41,8 +41,8 @@
     </ng-container>
     <ng-container matColumnDef="actions">
                     <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                    <mat-cell *matCellDef="let element"> 
-                        <button mat-icon-button><mat-icon>launch</mat-icon></button> <!--(click)="onEdit(element)"-->
+                    <mat-cell *matCellDef="let row"> 
+                        <button mat-icon-button (click)="onEdit(row)"><mat-icon>launch</mat-icon></button> 
                         <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
                     </mat-cell>
       </ng-container>

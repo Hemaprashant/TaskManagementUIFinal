@@ -1,1 +1,48 @@
-<p>addtask works!</p>
+<mat-card>
+<form [formGroup]="service.form" class="normal-form">
+   <div class="controlers-container">
+        <input type="hidden" formControlName="$key">
+        <mat-form-field>
+            <input formControlName="taskDescription" matInput placeholder="Task description*">
+            <mat-error>This Field is mandatory</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input formControlName="tasktype" matInput placeholder="Choose the type*"  style="width:50%">
+                        <mat-select>
+                                    <mat-option value="option">Personal</mat-option>
+                                    <mat-option value="option">Work</mat-option>
+                                    <mat-option value="option">Shopping</mat-option>
+                                    <mat-option value="option">Others</mat-option>
+                         </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <input formControlName="createdDate" matInput placeholder="choose a Date">
+                        <input matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <input formControlName="dueDtae" matInput placeholder="Choose the Due date">
+                         <input matInput [matDatepicker]="picker">
+                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                         <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <input formControlName="status" matInput placeholder="Status">
+                        <mat-select>
+                                    <mat-option value="option">Personal</mat-option>
+                                    <mat-option value="option">Work</mat-option>
+                                    <mat-option value="option">Shopping</mat-option>
+                                    <mat-option value="option">Others</mat-option>
+                         </mat-select>
+        </mat-form-field>
+        <div class="button-row">
+          <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
+          <button mat-raised-button color="warn">Clear</button>
+          <mat-dialog-actions>
+                <button mat-raised-button mat-dialog-close color="warn">Cancel</button>
+            </mat-dialog-actions>
+        </div>
+    </div>
+</form>
+</mat-card>

@@ -43,7 +43,7 @@ export class TasklistComponent implements OnInit {
   /*@ViewChild(MatSort) sort: MatSort;*/
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(private heroService: HeroService,private dialog: MatDialog) { }
-  openCreate() {
+  onCreate() {
     this.heroService.initializeFormGroup();
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -51,6 +51,15 @@ export class TasklistComponent implements OnInit {
     dialogConfig.width = "60%";
     this.dialog.open(AddtaskComponent,dialogConfig);
   }
+  onEdit(row){
+    this.heroService.populateForm(row);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "60%";
+    this.dialog.open(AddtaskComponent,dialogConfig);
+  }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
