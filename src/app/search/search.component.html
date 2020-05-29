@@ -20,20 +20,15 @@
                <div class="inl">    
                     <mat-form-field appearance="fill">
                          <mat-label>Priority</mat-label>
-                              <mat-select>
-                                    <mat-option value="option">Personal</mat-option>
-                                    <mat-option value="option">Work</mat-option>
-                                    <mat-option value="option">Shopping</mat-option>
-                                    <mat-option value="option">Others</mat-option>
-                         </mat-select>
+                              <mat-select formControlName="taskType" matInput placeholder="Choose the type*"  >
+                                   <mat-option *ngFor="let key of taskTypeOptions" [value]="key" >{{key}}</mat-option>
+                              </mat-select>
                     </mat-form-field>   
                     <mat-form-field appearance="fill">
                          <mat-label>Status</mat-label>
-                              <mat-select>
-                                    <mat-option value="option">New</mat-option>
-                                    <mat-option value="option">In-Progress</mat-option>
-                                    <mat-option value="option">Completed</mat-option>
-                         </mat-select>
+                              <mat-select formControlName="status" matInput placeholder="Status*"  >
+                                   <mat-option *ngFor="let key of statusOptions" [value]="key" >{{key}}</mat-option>
+                              </mat-select>
                     </mat-form-field> 
                     <mat-form-field>
                          <mat-label>Choose a date</mat-label>

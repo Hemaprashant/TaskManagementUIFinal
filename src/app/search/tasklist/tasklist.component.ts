@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewChild} from '@angular/core';
+import { Component, OnInit ,ViewChild, OnChanges} from '@angular/core';
 import { HeroService } from '../../shared/hero.service';
 import {MatPaginator} from '@angular/material/paginator';
 /*import {MatSort} from '@angular/material/sort';*/
@@ -6,6 +6,8 @@ import {MatDialog,MatDialogConfig} from '@angular/material/dialog';
 import {AddtaskComponent} from './../addtask/addtask.component';
 import {EdittaskComponent} from './../edittask/edittask.component';
 import {MatTableDataSource} from '@angular/material/table';
+import {Tasks} from '../tasks'
+import { error } from 'protractor';
 
 
 export interface PeriodicElement {
@@ -16,20 +18,8 @@ export interface PeriodicElement {
   status: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:new Date('5/4/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
-  {taskDescription: 'swathi', taskType: 'Shopping', createdDate:new Date('5/4/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
-  {taskDescription: 'swarnesh', taskType: 'Work', createdDate:new Date('12/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
-  {taskDescription: 'Prashant', taskType: 'shopping', createdDate:new Date('5/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
-  {taskDescription: 'Rohith', taskType: 'Personal', createdDate:new Date('1/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
-  {taskDescription: 'Vamsi', taskType: 'Personal', createdDate:new Date('5/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
-  {taskDescription: 'varun', taskType: 'Others', createdDate:new Date('6/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
-  {taskDescription: 'vijay', taskType: 'Personal', createdDate:new Date('10/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
-  {taskDescription: 'swarnesh', taskType: 'Others', createdDate:new Date('4/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
-  {taskDescription: 'Rohith', taskType: 'Personal', createdDate:new Date('25/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
-  {taskDescription: 'Prashant', taskType: 'Personal', createdDate:new Date('25/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'},
-  {taskDescription: 'swathi', taskType: 'Personal', createdDate:new Date('5/5/2020'),dueDate:new Date('10/5/2020') ,status: 'New'}
-];
+
+ var date=new Date(10/2/2020);
 
 @Component({
   selector: 'app-tasklist',
@@ -38,7 +28,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class TasklistComponent implements OnInit {
   displayedColumns: string[] = ['taskDescription', 'taskType', 'createdDate','dueDate', 'status','actions'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource:any;
   /*tasks: tassks[];*/
   errorMessage: string;
   /*@ViewChild(MatSort) sort: MatSort;*/
@@ -67,15 +57,18 @@ export class TasklistComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  /*getTask() {
-      this.heroService.getTask().subscribe(
-      tasks => this.tasks = tasks,
-      error => this.errorMessage = <any>error);
-  } */
+  
 
   ngOnInit(): void {
-    this.dataSource.paginator = this.paginator;
-    /*this.getTask(); */
-  }
+    this.heroService.getTask().subscribe(
+      response=>{
+        tasks =>tasks;
+        error=>error;
+        this.dataSource= new MatTableDataSource(response);
+        this.dataSource.paginator = this.paginator;
 
+      });
+
+  }
+  
 }

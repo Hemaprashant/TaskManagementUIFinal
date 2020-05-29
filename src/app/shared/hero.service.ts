@@ -5,6 +5,8 @@ import { catchError, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import {Tasks} from '../search/tasks';
+import {TaskType} from './Models/task-type.enum'
+import {Status} from './Models/status.enum'
 
 
 @Injectable({
@@ -25,10 +27,10 @@ export class HeroService {
   initializeFormGroup() {
     this.form.setValue({
       taskDescription: '',
-      taskType: '',
+      taskType: TaskType.Personal,
       dueDate: '',
       createdDate:'',
-      status: ''
+      status: Status.New
       
     });
   }
@@ -36,4 +38,9 @@ export class HeroService {
   populateForm(hero) {
     this.form.setValue(hero);
   }
+
+  getTask(): Observable<Tasks[]> {
+    return this.http.get<Tasks[]>('http://demo1268607.mockable.io/tasks').pipe(
+      tap(data => console.log('Data Fetched:' + JSON.stringify(data))));
+    }
 }
