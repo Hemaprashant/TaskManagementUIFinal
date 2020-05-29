@@ -4,6 +4,7 @@ import {MatPaginator} from '@angular/material/paginator';
 /*import {MatSort} from '@angular/material/sort';*/
 import {MatDialog,MatDialogConfig} from '@angular/material/dialog';
 import {AddtaskComponent} from './../addtask/addtask.component';
+import {EdittaskComponent} from './../edittask/edittask.component';
 import {MatTableDataSource} from '@angular/material/table';
 
 
@@ -57,7 +58,7 @@ export class TasklistComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(AddtaskComponent,dialogConfig);
+    this.dialog.open(EdittaskComponent,dialogConfig);
   }
 
 

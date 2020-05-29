@@ -3,13 +3,13 @@ import { HeroService } from '../../shared/hero.service';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-addtask',
-  templateUrl: './addtask.component.html',
-  styleUrls: ['./addtask.component.css']
+  selector: 'app-edittask',
+  templateUrl: './edittask.component.html',
+  styleUrls: ['./edittask.component.css']
 })
-export class AddtaskComponent implements OnInit {
+export class EdittaskComponent implements OnInit {
 
-  constructor(public service:HeroService,public dialogRef: MatDialogRef<AddtaskComponent>) { }
+  constructor(public service:HeroService,public dialogRef: MatDialogRef<EdittaskComponent>) { }
 
   ngOnInit(): void {
   }
@@ -22,5 +22,4 @@ export class AddtaskComponent implements OnInit {
     this.service.initializeFormGroup();
     this.dialogRef.close();
   }
-
 }

@@ -14,7 +14,6 @@ export class HeroService {
   constructor(private http: HttpClient) { }
   
   form: FormGroup = new FormGroup({
-    
     taskDescription: new FormControl('', Validators.required),
     taskType: new FormControl(''),
     createdDate: new FormControl(''),
@@ -25,7 +24,6 @@ export class HeroService {
 
   initializeFormGroup() {
     this.form.setValue({
-     
       taskDescription: '',
       taskType: '',
       dueDate: '',
@@ -35,7 +33,7 @@ export class HeroService {
     });
   }
 
-  populateForm(task:Tasks) {
-    this.form.setValue(task);
+  populateForm(hero) {
+    this.form.setValue(hero);
   }
 }

@@ -9,6 +9,7 @@ import { HttpClientModule }    from '@angular/common/http';
 import { SearchComponent } from './search/search.component';
 import { TasklistComponent } from './search/tasklist/tasklist.component';
 import { AddtaskComponent } from './search/addtask/addtask.component';
+import {EdittaskComponent} from './search/edittask/edittask.component';
 import { HeroService } from './shared/hero.service';
 import { TaskService } from './shared/task.service';
 import {Tasks} from './search/tasks';
@@ -17,7 +18,8 @@ import {Tasks} from './search/tasks';
     AppComponent,
     SearchComponent,
     TasklistComponent,
-    AddtaskComponent
+    AddtaskComponent,
+    EdittaskComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,6 @@ import {Tasks} from './search/tasks';
   ],
   providers: [HeroService,TaskService],
   bootstrap: [SearchComponent,TasklistComponent],
-  entryComponents:[AddtaskComponent]
+  entryComponents:[AddtaskComponent,EdittaskComponent]
 })
 export class AppModule { }
