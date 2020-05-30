@@ -12,7 +12,7 @@ import { TaskService } from '../../shared/task.service';
 })
 export class EdittaskComponent implements OnInit {
 
-  constructor(public service:HeroService,public dialogRef: MatDialogRef<EdittaskComponent>,public service1:TaskService) { }
+  constructor(public service:HeroService,public dialogRef: MatDialogRef<EdittaskComponent>,public notification:TaskService) { }
 
   
   private  taskTypes = TaskType;
@@ -34,7 +34,7 @@ export class EdittaskComponent implements OnInit {
   }
 
   onSubmit(){
-    this.service1.success(':: Updated Successfully');
+    this.notification.success(':: Updated Successfully');
     this.onClose();
   }
 }

@@ -13,7 +13,7 @@ import { TaskService } from '../../shared/task.service';
 
 export class AddtaskComponent implements OnInit {
 
-  constructor(public service:HeroService,public dialogRef: MatDialogRef<AddtaskComponent>,public service1:TaskService) { }
+  constructor(public service:HeroService,public dialogRef: MatDialogRef<AddtaskComponent>,public notification:TaskService) { }
   
   
   private  taskTypes = TaskType;
@@ -37,7 +37,7 @@ export class AddtaskComponent implements OnInit {
   }
 
   onSubmit(){
-    this.service1.success(':: Added Successfully');
+    this.notification.success(':: Added Successfully');
     this.onClose();
   }
 

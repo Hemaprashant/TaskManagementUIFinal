@@ -1,5 +1,4 @@
 export class Tasks{
-  
   taskDescription: string;
   taskType: string;
   createdDate: Date;

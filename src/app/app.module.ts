@@ -12,14 +12,17 @@ import { AddtaskComponent } from './search/addtask/addtask.component';
 import {EdittaskComponent} from './search/edittask/edittask.component';
 import { HeroService } from './shared/hero.service';
 import { TaskService } from './shared/task.service';
+import {DialogService} from './shared/dialog.service';
 import {Tasks} from './search/tasks';
+import { ConfirmComponent } from './search/confirm/confirm.component';
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
     TasklistComponent,
     AddtaskComponent,
-    EdittaskComponent
+    EdittaskComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -30,8 +33,8 @@ import {Tasks} from './search/tasks';
     FormsModule,
     HttpClientModule
   ],
-  providers: [HeroService,TaskService],
+  providers: [HeroService,TaskService,DialogService],
   bootstrap: [SearchComponent,TasklistComponent],
-  entryComponents:[AddtaskComponent,EdittaskComponent]
+  entryComponents:[AddtaskComponent,EdittaskComponent,ConfirmComponent]
 })
 export class AppModule { }

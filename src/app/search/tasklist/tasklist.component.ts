@@ -1,5 +1,7 @@
 import { Component, OnInit ,ViewChild, OnChanges} from '@angular/core';
 import { HeroService } from '../../shared/hero.service';
+import {TaskService} from '../../shared/task.service';
+import {DialogService} from '../../shared/dialog.service';
 import {MatPaginator} from '@angular/material/paginator';
 /*import {MatSort} from '@angular/material/sort';*/
 import {MatDialog,MatDialogConfig} from '@angular/material/dialog';
@@ -8,6 +10,7 @@ import {EdittaskComponent} from './../edittask/edittask.component';
 import {MatTableDataSource} from '@angular/material/table';
 import {Tasks} from '../tasks'
 import { error } from 'protractor';
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 export interface PeriodicElement {
@@ -33,7 +36,7 @@ export class TasklistComponent implements OnInit {
   errorMessage: string;
   /*@ViewChild(MatSort) sort: MatSort;*/
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  constructor(private heroService: HeroService,private dialog: MatDialog) { }
+  constructor(private heroService: HeroService,private dialog: MatDialog,private dialogService:DialogService,public notification:TaskService) { }
   onCreate() {
     this.heroService.initializeFormGroup();
     const dialogConfig = new MatDialogConfig();
@@ -51,7 +54,16 @@ export class TasklistComponent implements OnInit {
     this.dialog.open(EdittaskComponent,dialogConfig);
   }
 
-
+  onDelete(){
+    this.dialogService.openConfirmDialog()
+    .afterClosed().subscribe(res =>{
+      if(res){
+        /*this.heroService.deleteEmployee($key);*/
+        this.notification.warn('! Deleted successfully');
+      }
+      console.log(res);
+    });
+  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
