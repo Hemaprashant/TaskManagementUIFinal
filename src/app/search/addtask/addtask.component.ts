@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HeroService } from '../../shared/hero.service';
 import { MatDialogRef } from '@angular/material/dialog';
-import {TaskType} from '../../shared/Models/task-type.enum'
-import {Status} from '../../shared/Models/status.enum'
+import {TaskType} from '../../shared/Models/task-type.enum';
+import {Status} from '../../shared/Models/status.enum';
+import { TaskService } from '../../shared/task.service';
 
 @Component({
   selector: 'app-addtask',
@@ -12,7 +13,7 @@ import {Status} from '../../shared/Models/status.enum'
 
 export class AddtaskComponent implements OnInit {
 
-  constructor(public service:HeroService,public dialogRef: MatDialogRef<AddtaskComponent>) { }
+  constructor(public service:HeroService,public dialogRef: MatDialogRef<AddtaskComponent>,public service1:TaskService) { }
   
   
   private  taskTypes = TaskType;
@@ -23,14 +24,21 @@ export class AddtaskComponent implements OnInit {
     this.taskTypeOptions = Object.keys(this.taskTypes);
     this.statusOptions = Object.keys(this.statusTypes);
   }
+
   onClear() {
     this.service.form.reset();
     this.service.initializeFormGroup();
   }
+
    onClose() {
     this.service.form.reset();
     this.service.initializeFormGroup();
     this.dialogRef.close();
+  }
+
+  onSubmit(){
+    this.service1.success(':: Added Successfully');
+    this.onClose();
   }
 
 }
