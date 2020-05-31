@@ -27,7 +27,7 @@
          </mat-select>
         </mat-form-field>
         <div class="button-row">
-          <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid" (click)="onSubmit()">Submit</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid" (click)="onSubmit(service.form.value)">Submit</button>
           <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
           
         </div>

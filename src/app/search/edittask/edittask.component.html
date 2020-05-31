@@ -6,6 +6,12 @@
 <mat-card>
 <form [formGroup]="service.form" class="normal-form">
    <div class="controlers-container">
+        <mat-form-field hidden>
+            <input hidden formControlName="id" matInput>
+        </mat-form-field>
+        <mat-form-field>
+            <input readonly formControlName="userId" matInput placeholder="userId*">
+        </mat-form-field>
         <mat-form-field>
             <input formControlName="taskDescription" matInput placeholder="Task description*">
             <mat-error>This Field is mandatory</mat-error>
@@ -27,7 +33,7 @@
          </mat-select>
         </mat-form-field>
         <div class="button-row">
-          <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Update</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid" (click)="onSubmit(service.form.value)">Submit</button>
           <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
           
         </div>

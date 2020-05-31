@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import {TaskType} from '../../shared/Models/task-type.enum';
 import {Status} from '../../shared/Models/status.enum';
 import { TaskService } from '../../shared/task.service';
+import { Tasks } from '../tasks';
 
 @Component({
   selector: 'app-edittask',
@@ -14,7 +15,7 @@ export class EdittaskComponent implements OnInit {
 
   constructor(public service:HeroService,public dialogRef: MatDialogRef<EdittaskComponent>,public notification:TaskService) { }
 
-  
+  tasks:any;
   private  taskTypes = TaskType;
   public taskTypeOptions = [];
   private  statusTypes = Status;
@@ -27,14 +28,18 @@ export class EdittaskComponent implements OnInit {
     this.service.form.reset();
     this.service.initializeFormGroup();
   }
-  onClose() {
+  onSubmit(task :Tasks){
+    console.log(task);
+    this.service.updateTask(task)
+      .subscribe(hero => this.tasks.push(task));
+    this.notification.success('Updated Successfully');
+    this.onClose();
+  }
+   onClose() {
     this.service.form.reset();
     this.service.initializeFormGroup();
     this.dialogRef.close();
   }
 
-  onSubmit(){
-    this.notification.success(':: Updated Successfully');
-    this.onClose();
-  }
+  
 }

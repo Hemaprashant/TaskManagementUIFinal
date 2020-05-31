@@ -31,6 +31,7 @@ export interface PeriodicElement {
 })
 export class TasklistComponent implements OnInit {
   displayedColumns: string[] = ['taskDescription', 'taskType', 'createdDate','dueDate', 'status','actions'];
+  ELEMENT_DATA: Tasks[] ;
   dataSource:any;
   /*tasks: tassks[];*/
   errorMessage: string;
@@ -54,7 +55,7 @@ export class TasklistComponent implements OnInit {
     this.dialog.open(EdittaskComponent,dialogConfig);
   }
 
-  onDelete(){
+  onDelete(row){
     this.dialogService.openConfirmDialog()
     .afterClosed().subscribe(res =>{
       if(res){
@@ -69,7 +70,11 @@ export class TasklistComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  
+  getTask() {
+      this.heroService.getTask().subscribe(
+      tasks => this.dataSource = new  MatTableDataSource(tasks),
+      error => console.log(error));
+  } 
 
   ngOnInit(): void {
     this.heroService.getTask().subscribe(

@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import {Tasks} from '../search/tasks';
 import {TaskType} from './Models/task-type.enum'
 import {Status} from './Models/status.enum'
+import { error } from 'protractor';
 
 
 @Injectable({
@@ -16,6 +17,8 @@ export class HeroService {
   constructor(private http: HttpClient) { }
   
   form: FormGroup = new FormGroup({
+    id:new FormControl(''),
+    userId:new FormControl(''),
     taskDescription: new FormControl('', Validators.required),
     taskType: new FormControl(''),
     createdDate: new FormControl(''),
@@ -26,11 +29,13 @@ export class HeroService {
 
   initializeFormGroup() {
     this.form.setValue({
+      id:'',
+      userId:'guest',
       taskDescription: '',
-      taskType: TaskType.Personal,
+      taskType: TaskType,
       dueDate: '',
       createdDate:'',
-      status: Status.New
+      status: Status
       
     });
   }
@@ -40,7 +45,23 @@ export class HeroService {
   }
 
   getTask(): Observable<Tasks[]> {
-    return this.http.get<Tasks[]>('http://demo1268607.mockable.io/tasks').pipe(
+    return this.http.get<Tasks[]>('https://localhost:44363/api/task').pipe(
       tap(data => console.log('Data Fetched:' + JSON.stringify(data))));
     }
+    addTask(task: Tasks): Observable<any> {
+      console.log(task);
+      const options = new HttpHeaders({ 'Content-Type': 'application/json' });
+      return this.http.post('https://localhost:44363/api/task', task, { headers: options });
+      }
+      updateTask(task: Tasks): Observable<any> {
+        const options = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.put<any>('https://localhost:44363/api/task', task, { headers: options }).pipe(
+          tap(_ => console.log({task})))
+      }
+      deleteTask(_Id: string) {
+        const url = `https://localhost:44363/api/task/${_Id}`;
+        const options = new HttpHeaders({ 'Content-Type': 'application/json' });
+        console.log(url);
+        return this.http.delete(url,{ headers: options });
+        }   
 }
