@@ -55,11 +55,11 @@ export class TasklistComponent implements OnInit {
     this.dialog.open(EdittaskComponent,dialogConfig);
   }
 
-  onDelete(row){
+  onDelete(id:string){
     this.dialogService.openConfirmDialog()
     .afterClosed().subscribe(res =>{
       if(res){
-        /*this.heroService.deleteEmployee($key);*/
+        this.heroService.deleteTask(id);
         this.notification.warn('! Deleted successfully');
       }
       console.log(res);

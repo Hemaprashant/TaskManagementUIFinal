@@ -62,6 +62,6 @@ export class HeroService {
         const url = `https://localhost:44363/api/task/${_Id}`;
         const options = new HttpHeaders({ 'Content-Type': 'application/json' });
         console.log(url);
-        return this.http.delete(url,{ headers: options });
+        return this.http.delete(url,{ headers: options }).subscribe(()=>console.log("Task Deleted"));
         }   
 }
