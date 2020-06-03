@@ -11,6 +11,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Tasks} from '../tasks'
 import { error } from 'protractor';
 import { MatDialogRef } from '@angular/material/dialog';
+import {TaskType} from './../../shared/Models/task-type.enum'
+import {Status} from './../../shared/Models/status.enum'
 
 
 export interface PeriodicElement {
@@ -34,6 +36,10 @@ export class TasklistComponent implements OnInit {
   ELEMENT_DATA: Tasks[] ;
   dataSource:any;
   /*tasks: tassks[];*/
+  private  taskTypes = TaskType;
+  public taskTypeOptions = [];
+  private  statusTypes = Status;
+  public statusOptions = [];
   errorMessage: string;
   /*@ViewChild(MatSort) sort: MatSort;*/
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -85,6 +91,9 @@ export class TasklistComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
 
       });
+
+    this.taskTypeOptions = Object.keys(this.taskTypes);
+    this.statusOptions = Object.keys(this.statusTypes);
 
   }
   

@@ -45,21 +45,21 @@ export class HeroService {
   }
 
   getTask(): Observable<Tasks[]> {
-    return this.http.get<Tasks[]>('https://localhost:44363/api/task').pipe(
+    return this.http.get<Tasks[]>('http://taskmanagementapi.herokuapp.com/api/task').pipe(
       tap(data => console.log('Data Fetched:' + JSON.stringify(data))));
     }
     addTask(task: Tasks): Observable<any> {
       console.log(task);
       const options = new HttpHeaders({ 'Content-Type': 'application/json' });
-      return this.http.post('https://localhost:44363/api/task', task, { headers: options });
+      return this.http.post('http://taskmanagementapi.herokuapp.com/api/task', task, { headers: options });
       }
       updateTask(task: Tasks): Observable<any> {
         const options = new HttpHeaders({ 'Content-Type': 'application/json' });
-        return this.http.put<any>('https://localhost:44363/api/task', task, { headers: options }).pipe(
+        return this.http.put<any>('http://taskmanagementapi.herokuapp.com/api/task', task, { headers: options }).pipe(
           tap(_ => console.log({task})))
       }
       deleteTask(_Id: string) {
-        const url = `https://localhost:44363/api/task/${_Id}`;
+        const url = `http://taskmanagementapi.herokuapp.com/api/task/${_Id}`;
         const options = new HttpHeaders({ 'Content-Type': 'application/json' });
         console.log(url);
         return this.http.delete(url,{ headers: options }).subscribe(()=>console.log("Task Deleted"));
