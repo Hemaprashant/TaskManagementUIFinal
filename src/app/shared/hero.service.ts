@@ -63,5 +63,6 @@ export class HeroService {
         const options = new HttpHeaders({ 'Content-Type': 'application/json' });
         console.log(url);
         return this.http.delete(url,{ headers: options }).subscribe(()=>console.log("Task Deleted"));
+      
         }   
 }

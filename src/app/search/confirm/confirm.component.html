@@ -1,9 +1,7 @@
 <form [formGroup]="service.form" class="normal-form">
 <div>
     <div class="content-container">
-        <mat-form-field hidden>
-            <input  formControlName="id" matInput>
-        </mat-form-field>
+        
         <span class="content-span full-width">Are you sure want to delete this record?</span>
     </div>
     <button mat-flat-button id="no-button" [mat-dialog-close]="false" >NO</button>

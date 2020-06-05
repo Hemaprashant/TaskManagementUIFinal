@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewChild, OnChanges} from '@angular/core';
+import { Component, OnInit ,ViewChild, OnChanges, DoCheck} from '@angular/core';
 import { HeroService } from '../../shared/hero.service';
 import {TaskService} from '../../shared/task.service';
 import {DialogService} from '../../shared/dialog.service';
@@ -13,6 +13,7 @@ import { error } from 'protractor';
 import { MatDialogRef } from '@angular/material/dialog';
 import {TaskType} from './../../shared/Models/task-type.enum'
 import {Status} from './../../shared/Models/status.enum'
+import { TableDataService } from 'src/app/shared/table-data.service';
 
 
 export interface PeriodicElement {
@@ -31,7 +32,7 @@ export interface PeriodicElement {
   templateUrl: './tasklist.component.html',
   styleUrls: ['./tasklist.component.css']
 })
-export class TasklistComponent implements OnInit {
+export class TasklistComponent implements OnInit,DoCheck {
   displayedColumns: string[] = ['taskDescription', 'taskType', 'createdDate','dueDate', 'status','actions'];
   ELEMENT_DATA: Tasks[] ;
   dataSource:any;
@@ -43,7 +44,7 @@ export class TasklistComponent implements OnInit {
   errorMessage: string;
   /*@ViewChild(MatSort) sort: MatSort;*/
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  constructor(private heroService: HeroService,private dialog: MatDialog,private dialogService:DialogService,public notification:TaskService) { }
+  constructor(private heroService: HeroService,private dialog: MatDialog,private dialogService:DialogService,public notification:TaskService,private tableDataService:TableDataService) { }
   onCreate() {
     this.heroService.initializeFormGroup();
     const dialogConfig = new MatDialogConfig();
@@ -66,6 +67,8 @@ export class TasklistComponent implements OnInit {
     .afterClosed().subscribe(res =>{
       if(res){
         this.heroService.deleteTask(id);
+        this.tableDataService.setProperty();
+        this.dataSource.renderRows();
         this.notification.warn('! Deleted successfully');
       }
       console.log(res);
@@ -83,18 +86,21 @@ export class TasklistComponent implements OnInit {
   } 
 
   ngOnInit(): void {
+    
     this.heroService.getTask().subscribe(
       response=>{
         tasks =>tasks;
         error=>error;
+        this.tableDataService.setProperty();
         this.dataSource= new MatTableDataSource(response);
         this.dataSource.paginator = this.paginator;
 
       });
-
-    this.taskTypeOptions = Object.keys(this.taskTypes);
-    this.statusOptions = Object.keys(this.statusTypes);
-
+  }
+  ngDoCheck()
+  {
+    
+    this.dataSource=this.tableDataService.getProperty();
   }
   
 }

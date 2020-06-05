@@ -5,6 +5,7 @@ import {TaskType} from '../../shared/Models/task-type.enum'
 import {Status} from '../../shared/Models/status.enum'
 import { Tasks } from '../tasks';
 import { TaskService } from '../../shared/task.service';
+import { TableDataService } from 'src/app/shared/table-data.service';
 
 @Component({
   selector: 'app-addtask',
@@ -14,7 +15,7 @@ import { TaskService } from '../../shared/task.service';
 
 export class AddtaskComponent implements OnInit {
 
-  constructor(public service:HeroService,public dialogRef: MatDialogRef<AddtaskComponent>,public notification:TaskService) { }
+  constructor(public service:HeroService,public dialogRef: MatDialogRef<AddtaskComponent>,public notification:TaskService,private tableDataService:TableDataService) { }
   
   
   private  taskTypes = TaskType;
@@ -34,7 +35,12 @@ export class AddtaskComponent implements OnInit {
   onSubmit(task :Tasks){
     console.log(task);
     this.service.addTask(task)
-      .subscribe(hero => this.tasks.push(hero));
+      .subscribe(
+        result=>{
+        this.tableDataService.setProperty();
+
+        }
+      );
       this.notification.success('Added Successfully');
     this.onClose();
   }

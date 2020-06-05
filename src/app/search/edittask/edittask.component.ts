@@ -5,6 +5,7 @@ import {TaskType} from '../../shared/Models/task-type.enum';
 import {Status} from '../../shared/Models/status.enum';
 import { TaskService } from '../../shared/task.service';
 import { Tasks } from '../tasks';
+import { TableDataService } from 'src/app/shared/table-data.service';
 
 @Component({
   selector: 'app-edittask',
@@ -13,7 +14,7 @@ import { Tasks } from '../tasks';
 })
 export class EdittaskComponent implements OnInit {
 
-  constructor(public service:HeroService,public dialogRef: MatDialogRef<EdittaskComponent>,public notification:TaskService) { }
+  constructor(public service:HeroService,public dialogRef: MatDialogRef<EdittaskComponent>,public notification:TaskService,private tableDataService:TableDataService) { }
 
   tasks:any;
   private  taskTypes = TaskType;
@@ -31,7 +32,11 @@ export class EdittaskComponent implements OnInit {
   onSubmit(task :Tasks){
     console.log(task);
     this.service.updateTask(task)
-      .subscribe(hero => this.tasks.push(task));
+      .subscribe(result=>{
+        this.tableDataService.setProperty();
+
+      }
+      );
     this.notification.success('Updated Successfully');
     this.onClose();
   }
