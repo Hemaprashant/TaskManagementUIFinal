@@ -17,7 +17,7 @@
         </mat-form-field>
         
         <mat-form-field>
-                         <input formControlName="dueDate" [min]="minDate" matInput placeholder="Choose the Due date" matInput [matDatepicker]="picker">
+                         <input formControlName="dueDate" matInput placeholder="Choose the Due date" matInput [matDatepicker]="picker">
                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                          <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -29,7 +29,6 @@
         <div class="button-row">
           <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid" (click)="onSubmit(service.form.value)">Submit</button>
           <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
-          
         </div>
     </div>
 </form>
