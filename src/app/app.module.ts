@@ -15,6 +15,7 @@ import { TaskService } from './shared/task.service';
 import {DialogService} from './shared/dialog.service';
 import {Tasks} from './search/tasks';
 import { ConfirmComponent } from './search/confirm/confirm.component';
+import { ArchieveComponent } from './search/archieve/archieve.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { ConfirmComponent } from './search/confirm/confirm.component';
     TasklistComponent,
     AddtaskComponent,
     EdittaskComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    ArchieveComponent
   ],
   imports: [
     BrowserModule,

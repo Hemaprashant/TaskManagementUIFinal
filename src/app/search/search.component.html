@@ -4,13 +4,13 @@
       <mat-toolbar color="primary" class="fixed-header">
            <mat-toolbar-row>
                 <span class="title-center">Task Management System</span>
-                <button mat-icon-button>
+                <button mat-icon-button [mat-menu-trigger-for]="menu">
                      <mat-icon>account_circle</mat-icon>
                 </button>
            </mat-toolbar-row>
         </mat-toolbar>
         <mat-menu x-position="before" #menu="matMenu">
-           <button mat-menu-item>Profile</button>
+           <button mat-menu-item (click)="onArchieve()">Archived Tasks</button>
            <button mat-menu-item>Logout</button>   
         </mat-menu>
      </div>

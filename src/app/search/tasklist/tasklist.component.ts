@@ -67,11 +67,12 @@ export class TasklistComponent implements OnInit,DoCheck {
     .afterClosed().subscribe(res =>{
       if(res){
         this.heroService.deleteTask(id);
-        this.tableDataService.setProperty();
-        this.dataSource.renderRows();
         this.notification.warn('! Deleted successfully');
-      }
+        this.tableDataService.setProperty();
+      /*this.dataSource=this.tableDataService.getProperty();*/
       console.log(res);
+      }
+      
     });
   }
   applyFilter(event: Event) {

@@ -23,6 +23,7 @@ export class AddtaskComponent implements OnInit {
   private  statusTypes = Status;
   public statusOptions = [];
   tasks:any;
+  minDate = 0;
   ngOnInit(): void {
     this.taskTypeOptions = Object.keys(this.taskTypes);
     this.statusOptions = Object.keys(this.statusTypes);
