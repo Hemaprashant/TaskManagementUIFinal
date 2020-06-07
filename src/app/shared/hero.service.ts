@@ -27,6 +27,14 @@ export class HeroService {
     
   });
 
+  searchForm: FormGroup = new FormGroup({
+    taskType: new FormControl(''),
+    dueDate: new FormControl(''),
+    status: new FormControl('')
+    
+  });
+  
+  url="https://taskmanagementapi.herokuapp.com/api/task";//replace this url with "http://taskmanagementapi.herokuapp.com/api/task" after backend is hosted
   initializeFormGroup() {
     this.form.setValue({
       id:'',
@@ -34,7 +42,17 @@ export class HeroService {
       taskDescription: '',
       taskType: TaskType,
       dueDate: '',
-      createdDate:'',
+      createdDate:new Date(),
+      status: Status.New
+      
+    });
+  }
+
+  initializeSearchFormGroup() {
+    this.form.setValue({
+     
+      taskType: TaskType,
+      dueDate: '',
       status: Status
       
     });
@@ -45,24 +63,28 @@ export class HeroService {
   }
 
   getTask(): Observable<Tasks[]> {
-    return this.http.get<Tasks[]>('http://taskmanagementapi.herokuapp.com/api/task').pipe(
+    return this.http.get<Tasks[]>(this.url).pipe(
+      tap(data => console.log('Data Fetched:' + JSON.stringify(data))));
+    }
+  getArchieveTask(): Observable<Tasks[]> {
+    return this.http.get<Tasks[]>(this.url+'/archieve').pipe(
       tap(data => console.log('Data Fetched:' + JSON.stringify(data))));
     }
     addTask(task: Tasks): Observable<any> {
       console.log(task);
       const options = new HttpHeaders({ 'Content-Type': 'application/json' });
-      return this.http.post('http://taskmanagementapi.herokuapp.com/api/task', task, { headers: options });
+      return this.http.post(this.url, task, { headers: options });
       }
       updateTask(task: Tasks): Observable<any> {
         const options = new HttpHeaders({ 'Content-Type': 'application/json' });
-        return this.http.put<any>('http://taskmanagementapi.herokuapp.com/api/task', task, { headers: options }).pipe(
+        return this.http.put<any>(this.url, task, { headers: options }).pipe(
           tap(_ => console.log({task})))
       }
       deleteTask(_Id: string) {
-        const url = `http://taskmanagementapi.herokuapp.com/api/task/${_Id}`;
+        const url = this.url+`/${_Id}`;
         const options = new HttpHeaders({ 'Content-Type': 'application/json' });
         console.log(url);
-        return this.http.delete(url,{ headers: options }).subscribe(()=>console.log("Task Deleted"));
+        return this.http.delete(url,{ headers: options });
       
         }   
 }

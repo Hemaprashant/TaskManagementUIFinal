@@ -25,11 +25,11 @@
     </ng-container>
     <ng-container matColumnDef="createdDate">
       <mat-header-cell *matHeaderCellDef >Date Of Creation</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.createdDate}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.createdDate|date}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="dueDate">
       <mat-header-cell *matHeaderCellDef >Due Date</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.dueDate}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.dueDate|date}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef >Status</mat-header-cell>

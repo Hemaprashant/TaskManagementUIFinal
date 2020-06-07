@@ -14,6 +14,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import {TaskType} from './../../shared/Models/task-type.enum'
 import {Status} from './../../shared/Models/status.enum'
 import { TableDataService } from 'src/app/shared/table-data.service';
+import { filter } from 'rxjs/operators';
+import { Sort } from '@angular/material/sort';
 
 
 export interface PeriodicElement {
@@ -41,10 +43,17 @@ export class TasklistComponent implements OnInit,DoCheck {
   public taskTypeOptions = [];
   private  statusTypes = Status;
   public statusOptions = [];
+  public filterdTasks:Tasks[];
+  public tasks:any;
+  public sortedData:any;
+
   errorMessage: string;
   /*@ViewChild(MatSort) sort: MatSort;*/
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  constructor(private heroService: HeroService,private dialog: MatDialog,private dialogService:DialogService,public notification:TaskService,private tableDataService:TableDataService) { }
+  constructor(public heroService: HeroService,private dialog: MatDialog,private dialogService:DialogService,public notification:TaskService,private tableDataService:TableDataService) { }
+  
+  
+
   onCreate() {
     this.heroService.initializeFormGroup();
     const dialogConfig = new MatDialogConfig();
@@ -62,11 +71,46 @@ export class TasklistComponent implements OnInit,DoCheck {
     this.dialog.open(EdittaskComponent,dialogConfig);
   }
 
+  onSearch(query:any)
+  {
+    console.log(query);
+    var tasks=this.tableDataService.getProperty();
+    this.filterdTasks=tasks.data;
+    console.log(this.filterdTasks);
+    if(query.status!="" && query.status!=null)
+    {
+      this.filterdTasks=this.filterdTasks.filter(q=>q.status==query.status)
+      console.log(this.filterdTasks);
+    }
+    if(query.taskType!="" && query.taskType!=null)
+    {
+      this.filterdTasks=this.filterdTasks.filter(q=>q.taskType==query.taskType)
+      console.log(this.filterdTasks);
+    }
+    if(query.dueDate!="" && query.dueDate!=null)
+    {
+      this.filterdTasks=this.filterdTasks.filter(q=> new Date(q.dueDate).toDateString()==new Date(query.dueDate).toDateString())
+      console.log(new Date(query.dueDate).toDateString())
+      console.log(this.filterdTasks);
+    }
+    this.tableDataService.setSearchProperty(this.filterdTasks);
+    
+  }
+  onClear()
+  {
+    this.heroService.searchForm.reset();
+    this.heroService.initializeFormGroup();
+    this.tableDataService.setProperty();
+  }
   onDelete(id:string){
     this.dialogService.openConfirmDialog()
     .afterClosed().subscribe(res =>{
       if(res){
-        this.heroService.deleteTask(id);
+        this.heroService.deleteTask(id).subscribe(
+          result=>{
+            this.tableDataService.setProperty();
+          }
+        );
         this.notification.warn('! Deleted successfully');
         this.tableDataService.setProperty();
       /*this.dataSource=this.tableDataService.getProperty();*/
@@ -82,12 +126,15 @@ export class TasklistComponent implements OnInit,DoCheck {
 
   getTask() {
       this.heroService.getTask().subscribe(
-      tasks => this.dataSource = new  MatTableDataSource(tasks),
+
+      tasks => this.dataSource = new  MatTableDataSource(tasks.map(q=>{q.dueDate=new Date(q.dueDate).toDateString()})),
       error => console.log(error));
+      t=>console.log("In here\n"+this.dataSource.data)
   } 
 
   ngOnInit(): void {
-    
+    this.taskTypeOptions = Object.keys(this.taskTypes);
+    this.statusOptions = Object.keys(this.statusTypes);
     this.heroService.getTask().subscribe(
       response=>{
         tasks =>tasks;
@@ -95,13 +142,17 @@ export class TasklistComponent implements OnInit,DoCheck {
         this.tableDataService.setProperty();
         this.dataSource= new MatTableDataSource(response);
         this.dataSource.paginator = this.paginator;
-
+        this.tasks=response;
       });
+      this.heroService.initializeSearchFormGroup();
+
+    
   }
   ngDoCheck()
   {
     
     this.dataSource=this.tableDataService.getProperty();
+    
   }
   
 }

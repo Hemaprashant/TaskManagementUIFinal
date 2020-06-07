@@ -28,4 +28,8 @@ export class TableDataService {
 
     
   }
+  setSearchProperty(data:any)
+  {
+    this.dataSource=new MatTableDataSource(data);
+  }
 }

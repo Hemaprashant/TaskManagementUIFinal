@@ -25,7 +25,7 @@ export class ArchieveComponent implements OnInit {
     this.dialogRef.close();
   }
   ngOnInit(): void {
-    this.heroService.getTask().subscribe(
+    this.heroService.getArchieveTask().subscribe(
       response=>{
         tasks =>tasks;
         error=>error;

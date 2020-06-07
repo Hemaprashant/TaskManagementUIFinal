@@ -1,5 +1,6 @@
 <div class="middle">
     <div class="transbox">
+      <form [formGroup]="heroService.searchForm" class="normal-form">
                <div class="inl1">    
                     <mat-form-field appearance="fill" style="margin-right:50px;left:30%;">
                          <mat-label>Priority</mat-label>
@@ -15,17 +16,20 @@
                     </mat-form-field> 
                     <mat-form-field style="margin-right:50px;left:30%;">
                          <mat-label>Choose a date</mat-label>
-                         <input matInput [matDatepicker]="picker">
+                         <input matInput [matDatepicker]="picker" formControlName="dueDate">
                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                          <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field> 
                     <div class="button2"> 
-                        <button mat-raised-button color="primary">Search</button> 
+                        <button mat-raised-button color="primary" (click)="onSearch(heroService.searchForm.value)">Search</button> 
                     </div> 
                     <div style="margin-left:20%;padding:2.6%">
-                        <button mat-raised-button color="primary">Clear Search</button>
+                        <button mat-raised-button color="primary" (click)="onClear()">Clear Search</button>
                     </div>  
-               </div>
+              
+              
+                  </div>
+        </form>
      </div>
      </div>
 <div class="container">
@@ -59,13 +63,13 @@
     </ng-container>
     <ng-container matColumnDef="createdDate">
       <mat-header-cell *matHeaderCellDef >Date Of Creation</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.createdDate}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.createdDate|date}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="dueDate">
       <mat-header-cell *matHeaderCellDef >Due Date</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.dueDate}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.dueDate|date}}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="status">
+    <ng-container matColumnDef="status" read>
       <mat-header-cell *matHeaderCellDef >Status</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.status}}</mat-cell>
     </ng-container>

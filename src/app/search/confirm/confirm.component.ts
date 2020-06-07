@@ -17,14 +17,5 @@ export class ConfirmComponent implements OnInit {
    onClose() {
     this.dialogRef.close(false);
   }
-  onDelete(conformation:any,task:Tasks){
-    if(conformation=="true")
-    {
-    console.log(conformation+'    '+task)
-      
-      this.service.deleteTask(task.id);
-      this.tableDataService.setProperty()
-      
-    }
-  }
+  
 }
