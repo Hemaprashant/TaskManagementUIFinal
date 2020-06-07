@@ -38,7 +38,6 @@ export class TasklistComponent implements OnInit,DoCheck {
   displayedColumns: string[] = ['taskDescription', 'taskType', 'createdDate','dueDate', 'status','actions'];
   ELEMENT_DATA: Tasks[] ;
   dataSource:any;
-  /*tasks: tassks[];*/
   private  taskTypes = TaskType;
   public taskTypeOptions = [];
   private  statusTypes = Status;
@@ -48,8 +47,6 @@ export class TasklistComponent implements OnInit,DoCheck {
   public sortedData:any;
 
   errorMessage: string;
-  /*@ViewChild(MatSort) sort: MatSort;*/
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(public heroService: HeroService,private dialog: MatDialog,private dialogService:DialogService,public notification:TaskService,private tableDataService:TableDataService) { }
   
   
@@ -141,7 +138,7 @@ export class TasklistComponent implements OnInit,DoCheck {
         error=>error;
         this.tableDataService.setProperty();
         this.dataSource= new MatTableDataSource(response);
-        this.dataSource.paginator = this.paginator;
+        
         this.tasks=response;
       });
       this.heroService.initializeSearchFormGroup();
@@ -152,6 +149,7 @@ export class TasklistComponent implements OnInit,DoCheck {
   {
     
     this.dataSource=this.tableDataService.getProperty();
+    
     
   }
   
